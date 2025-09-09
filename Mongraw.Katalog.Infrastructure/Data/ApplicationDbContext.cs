@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Mongraw.Katalog.Domain;
 using Mongraw.Katalog.Domain.Models.UserManagement;
+using Mongraw.Katalog.Infrastructure.DbConfiguration;
 
 
 namespace Mongraw.Katalog.Web.Data
@@ -15,6 +16,12 @@ namespace Mongraw.Katalog.Web.Data
             : base(options)
         {
             _httpContextAccessor = httpContextAccessor;
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new CategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())

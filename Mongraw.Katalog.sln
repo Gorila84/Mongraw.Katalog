@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.13.35919.96 d17.13
+VisualStudioVersion = 17.13.35919.96
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongraw.Katalog.Web", "Mongraw.Katalog.Web\Mongraw.Katalog.Web.csproj", "{43772C7C-C4A6-43FB-A995-A654AC7ED41A}"
 EndProject
@@ -10,6 +10,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongraw.Katalog.Domain", "Mongraw.Katalog.Domain\Mongraw.Katalog.Domain.csproj", "{E6BD8F48-4502-493D-8E7E-7CD73A427120}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongraw.Katalog.Repositories", "Mongraw.Katalog.Repositories\Mongraw.Katalog.Repositories.csproj", "{B96BCC44-CCF7-4DB0-B335-533A0E09C7EB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongraw.Katalog.Application", "Mongraw.Katalog.Application\Mongraw.Katalog.Application.csproj", "{A3AF0938-94E9-4674-BE42-ABC5C76782B6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mongraw.Katalog.Tests", "Mongraw.Katalog.Tests\Mongraw.Katalog.Tests.csproj", "{107DE33A-ECC5-49CF-A42F-3C77A89F2818}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{B96BCC44-CCF7-4DB0-B335-533A0E09C7EB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B96BCC44-CCF7-4DB0-B335-533A0E09C7EB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B96BCC44-CCF7-4DB0-B335-533A0E09C7EB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A3AF0938-94E9-4674-BE42-ABC5C76782B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3AF0938-94E9-4674-BE42-ABC5C76782B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3AF0938-94E9-4674-BE42-ABC5C76782B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3AF0938-94E9-4674-BE42-ABC5C76782B6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{107DE33A-ECC5-49CF-A42F-3C77A89F2818}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{107DE33A-ECC5-49CF-A42F-3C77A89F2818}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{107DE33A-ECC5-49CF-A42F-3C77A89F2818}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{107DE33A-ECC5-49CF-A42F-3C77A89F2818}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
+using Mongraw.Katalog.Domain.Interfaces;
 using Mongraw.Katalog.Web.Data;
+using System.Linq.Expressions;
 
 namespace Mongraw.Katalog.Repositories
 {
@@ -42,6 +45,41 @@ namespace Mongraw.Katalog.Repositories
         public async Task<bool> SaveChangesAsync()
         {
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<(IEnumerable<T> Items, int TotalCount)> GetAsync(
+      Expression<Func<T, bool>>? filter = null,
+      int pageNumber = 1,
+      int pageSize = 10)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+                query = query.Where(filter);
+
+            int totalCount = await query.CountAsync();
+
+            var items = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (items, totalCount);
+        }
+
+        public async Task<IEnumerable<T>> GetAllWithIcludeAsync(
+    Expression<Func<T, bool>>? filter = null,
+    Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+                query = query.Where(filter);
+
+            if (include != null)
+                query = include(query);
+
+            return await query.ToListAsync();
         }
     }
 }
