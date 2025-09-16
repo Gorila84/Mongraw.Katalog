@@ -18,6 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mongraw.Katalog.Application\Mongraw.Katalog.Application.csproj" />
     <ProjectReference Include="..\Mongraw.Katalog.Repositories\Mongraw.Katalog.Repositories.csproj" />
   </ItemGroup>
 

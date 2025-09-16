@@ -81,5 +81,15 @@ namespace Mongraw.Katalog.Repositories
 
             return await query.ToListAsync();
         }
+
+        public async Task<T> GetOneWithInclude(Expression<Func<T, bool>> filter,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include)
+        {
+            IQueryable<T> query = _dbSet;
+            query = query.Where(filter);
+            if (include != null)
+                query = include(query);
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

@@ -42,9 +42,9 @@ namespace Mongraw.Katalog.Repositories
         }
 
         public async Task<(IEnumerable<Category> Items, int TotalCount)> GetCategoriesAsync(
-     Expression<Func<Category, bool>>? filter = null,
-     int pageNumber = 1,
-     int pageSize = 10)
+         Expression<Func<Category, bool>>? filter = null,
+         int pageNumber = 1,
+         int pageSize = 10)
         {
             return await _genericRepository.GetAsync(filter, pageNumber, pageSize);
         }
@@ -55,8 +55,12 @@ namespace Mongraw.Katalog.Repositories
             return categoriesWithProducts;
         }
 
+        public async Task<Category> ExistsByNameAsync(string name)
+        {
+            var category = await _genericRepository.GetAsync(c => c.Name == name, 1, 1);
+            return category.Items.FirstOrDefault();
+        }
 
-
-
+     
     }
 }

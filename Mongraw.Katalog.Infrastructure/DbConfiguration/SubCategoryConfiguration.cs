@@ -9,6 +9,7 @@ namespace Mongraw.Katalog.Infrastructure.DbConfiguration
         public void Configure(EntityTypeBuilder<Subcategory> builder)
         {
             builder.HasKey(sc => sc.Id);
+            builder.HasIndex(builder => builder.Name).IsUnique();
             builder.Property(sc => sc.Name).IsRequired().HasMaxLength(100);
             builder.HasOne(sc => sc.Category)
                    .WithMany(c => c.Subcategories)

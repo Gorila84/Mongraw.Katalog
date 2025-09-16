@@ -14,5 +14,6 @@ namespace Mongraw.Katalog.Domain.Interfaces
       int pageSize = 10);
         Task<Category?> GetCategoryByIdAsync(int id);
         Task UpdateCategoryAsync(Category category);
+        Task<Category> ExistsByNameAsync(string name);
     }
 }

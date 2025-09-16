@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
-using Mongraw.Katalog.Domain.Models.CategoryEntity;
 using System.Linq.Expressions;
 
 namespace Mongraw.Katalog.Domain.Interfaces
@@ -24,5 +23,8 @@ namespace Mongraw.Katalog.Domain.Interfaces
         Task<IEnumerable<T>> GetAllWithIcludeAsync(
     Expression<Func<T, bool>>? filter = null,
     Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
+        Task<T> GetOneWithInclude(Expression<Func<T, bool>> filter,
+            Func<IQueryable<T>, IIncludableQueryable<T, object>> include);
+
     }
 }
