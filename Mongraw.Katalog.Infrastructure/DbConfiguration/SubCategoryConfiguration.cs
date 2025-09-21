@@ -11,10 +11,7 @@ namespace Mongraw.Katalog.Infrastructure.DbConfiguration
             builder.HasKey(sc => sc.Id);
             builder.HasIndex(builder => builder.Name).IsUnique();
             builder.Property(sc => sc.Name).IsRequired().HasMaxLength(100);
-            builder.HasOne(sc => sc.Category)
-                   .WithMany(c => c.Subcategories)
-                   .HasForeignKey(sc => sc.CategoryId)
-                   .OnDelete(DeleteBehavior.Cascade);
+           
             builder.HasMany(sc => sc.Items)
                    .WithOne(i => i.Subcategory)
                    .HasForeignKey(i => i.SubcategoryId)

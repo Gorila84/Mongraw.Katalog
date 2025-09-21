@@ -1,48 +1,73 @@
-﻿
-using Microsoft.Extensions.DependencyInjection;
+﻿using Mongraw.Katalog.Domain.Interfaces;
+using Mongraw.Katalog.Repositories;
 using System.Reflection;
-
 
 namespace Mongraw.Katalog.Web.Extensions
 {
     public static class DependencyInjectionExtensions
     {
+        public static IServiceCollection RegisterByConvention(
+        this IServiceCollection services,
+        string implementationAssemblyName,
+        string interfaceNamespace,
+        ServiceLifetime lifetime)
+        {
+            try
+            {
+                var implementationAssembly = AppDomain.CurrentDomain
+                            .GetAssemblies()
+                            .FirstOrDefault(a => a.GetName().Name == implementationAssemblyName)
+                            ?? Assembly.Load(implementationAssemblyName);
+
+                var typesToRegister = implementationAssembly.GetTypes()
+                            .Where(t =>
+                                t.IsClass &&
+                                !t.IsAbstract &&
+                                !t.IsGenericTypeDefinition 
+                            )
+                            .ToList();
+
+                foreach (var implType in typesToRegister)
+                {
+                    var interfaceType = implType.GetInterface($"I{implType.Name}");
+                    if (interfaceType == null)
+                        continue;
+
+                    if (interfaceType.Namespace != null && interfaceType.Namespace.StartsWith(interfaceNamespace))
+                    {
+                        services.Add(new ServiceDescriptor(interfaceType, implType, lifetime));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
+            return services;
+        }
+
         public static IServiceCollection RegisterRepositories(this IServiceCollection services)
         {
-            return services.RegisterByConvention("Mongraw.Katalog.Repositories", "Repository", ServiceLifetime.Scoped);
+            return services.RegisterByConvention(
+                implementationAssemblyName: "Mongraw.Katalog.Repositories",
+                interfaceNamespace: "Mongraw.Katalog.Domain.Interfaces",
+                lifetime: ServiceLifetime.Scoped
+            );
         }
 
         public static IServiceCollection RegisterServices(this IServiceCollection services)
         {
-            return services.RegisterByConvention("Mongraw.Katalog.Application", "Service", ServiceLifetime.Scoped);
+            return services.RegisterByConvention(
+                implementationAssemblyName: "Mongraw.Katalog.Application",
+                interfaceNamespace: "Mongraw.Katalog.Application.Service.Interfaces",
+                lifetime: ServiceLifetime.Scoped
+            );
         }
 
-        private static IServiceCollection RegisterByConvention(
-            this IServiceCollection services,
-            string assemblyName,
-            string endsWith,
-            ServiceLifetime lifetime)
+        public static IServiceCollection RegisterGenericMethods(this IServiceCollection services)
         {
-            var assembly = AppDomain.CurrentDomain
-                .GetAssemblies()
-                .FirstOrDefault(a => a.GetName().Name == assemblyName);
-
-            if (assembly == null)
-                throw new InvalidOperationException($"Assembly '{assemblyName}' not found.");
-
-            var types = assembly.GetTypes()
-                .Where(t => t.IsClass && !t.IsAbstract && t.Name.EndsWith(endsWith))
-                .ToList();
-
-            foreach (var implementationType in types)
-            {
-                var interfaceType = implementationType.GetInterface($"I{implementationType.Name}");
-                if (interfaceType != null)
-                {
-                    services.Add(new ServiceDescriptor(interfaceType, implementationType, lifetime));
-                }
-            }
-
+            services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
             return services;
         }
     }

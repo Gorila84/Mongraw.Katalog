@@ -2,10 +2,9 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Mongraw.Katalog.Web.Data;
 using Mongraw.Katalog.Web.Extensions;
-
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
-
 
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
@@ -16,12 +15,28 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
-
+builder.Services.AddControllers();
 builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
+builder.Services.RegisterGenericMethods();
+builder.Services.RegisterFluentValidators();
+
+Log.Logger = new LoggerConfiguration()
+    .ReadFrom.Configuration(builder.Configuration)
+    .Enrich.FromLogContext()
+    .WriteTo.Console()
+    //.WriteTo.File("Logs/log-.txt",
+    //    rollingInterval: RollingInterval.Day,
+    //    rollOnFileSizeLimit: true,
+    //    fileSizeLimitBytes: 3_000_000,
+    //    retainedFileCountLimit: 10)
+    .CreateLogger();
+
+builder.Host.UseSerilog();
 
 var app = builder.Build();
 
+app.UseSerilogRequestLogging();
 
 if (app.Environment.IsDevelopment())
 {
@@ -41,9 +56,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllers();
 app.MapRazorPages();
 
 app.Run();

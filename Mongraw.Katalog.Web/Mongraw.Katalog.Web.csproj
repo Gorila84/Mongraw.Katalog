@@ -8,16 +8,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="12.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.18" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.18" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.18" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.18" />
+    <PackageReference Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.0.0" />
+    <PackageReference Include="Serilog.Sinks.File" Version="7.0.0" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Mongraw.Katalog.Application\Mongraw.Katalog.Application.csproj" />
+    <ProjectReference Include="..\Mongraw.Katalog.Domain\Mongraw.Katalog.Domain.csproj" />
     <ProjectReference Include="..\Mongraw.Katalog.Infrastructure\Mongraw.Katalog.Infrastructure.csproj" />
+    <ProjectReference Include="..\Mongraw.Katalog.Repositories\Mongraw.Katalog.Repositories.csproj" />
   </ItemGroup>
 
 </Project>

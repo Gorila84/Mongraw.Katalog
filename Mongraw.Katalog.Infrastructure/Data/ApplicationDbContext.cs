@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Mongraw.Katalog.Domain;
+using Mongraw.Katalog.Domain.Models.CategoryEntity;
+using Mongraw.Katalog.Domain.Models.ItemsEntities;
 using Mongraw.Katalog.Domain.Models.UserManagement;
 using Mongraw.Katalog.Infrastructure.DbConfiguration;
 
@@ -22,8 +24,12 @@ namespace Mongraw.Katalog.Web.Data
         {
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
+            modelBuilder.ApplyConfiguration(new ItemsConfiguration());
         }
 
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Subcategory> SubCategories { get; set; }
+        public DbSet<Item> Items { get; set; }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             ApplyAuditInfo();

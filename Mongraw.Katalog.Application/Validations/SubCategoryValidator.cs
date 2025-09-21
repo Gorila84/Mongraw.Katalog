@@ -9,7 +9,8 @@ namespace Mongraw.Katalog.Application.Validations
         {
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .WithMessage("Nazwa podkategorii nie może być pusta.");
+                .WithName("Nazwa podkategorii")
+                .WithMessage(Resources.ThisFieldIsRequired);
         }
     }
 }

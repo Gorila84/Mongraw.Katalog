@@ -11,11 +11,17 @@ namespace Mongraw.Katalog.Application.Service
         private readonly ICategoryRepository _categoryRepository;
         private readonly IValidator<Category> _categoryValidator;
 
+        public ISubCategoryService Object1 { get; }
+        public IValidator<Subcategory> Object2 { get; }
+
         public CategoryService(ICategoryRepository categoryRepository, IValidator<Category> categoryValidator)
         {
             _categoryRepository = categoryRepository;
             _categoryValidator = categoryValidator;
         }
+
+     
+
         public async Task<Result<IEnumerable<Category>>> GetAllCategoriesAsync()
         {
             var result = await _categoryRepository.GetAllCategoriesAsync();
@@ -55,10 +61,11 @@ namespace Mongraw.Katalog.Application.Service
             }
 
             var existingCategory = await _categoryRepository.GetCategoryByIdAsync(category.Id);
-
+           
             if (existingCategory == null)
             {
-                return Result.Failure("Nie znaleziono kategorii o podanym numerze.");
+                var errorText = Resources.ItemIsMissing;
+                return Result.Failure(string.Format(errorText, "kategorii"));
             }
             await _categoryRepository.UpdateCategoryAsync(category);
             return Result.Success();
@@ -69,17 +76,20 @@ namespace Mongraw.Katalog.Application.Service
 
             if (category == null)
             {
-                return Result.Failure("Nie znaleziono kategorii o podanym numerze.");
+                var errorText = Resources.ItemIsMissing;
+                return Result.Failure(string.Format(errorText, "kategorii"));
             }
 
             if (category.Items.Count > 0)
             {
-                return Result.Failure("Nie można usunąć kategorii, która zawiera produkty.");
+                var errorText = Resources.DeleteIsNotPossible;
+                return Result.Failure(string.Format(errorText, "kategorii", "produkty"));
             }
 
             if (category.Subcategories.Count > 0)
             {
-                return Result.Failure("Nie można usunąć kategorii, która zawiera podkategorie.");
+                var errorText = Resources.DeleteIsNotPossible;
+                return Result.Failure(string.Format(errorText, "kategorii", "podkategorie"));
             }
             await _categoryRepository.DeleteCategoryAsync(category);
             return Result.Success();

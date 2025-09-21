@@ -7,7 +7,6 @@ namespace Mongraw.Katalog.Domain.Models.CategoryEntity
         public int Id { get; set; }
         public string Name { get; set; }
         public int CategoryId { get; set; }
-        public Category Category { get; set; }
-        public ICollection<Item> Items { get; set; } = new List<Item>();
+        public ICollection<Item>? Items { get; set; } = new List<Item>();
     }
 }

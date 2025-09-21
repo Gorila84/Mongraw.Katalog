@@ -1,18 +1,12 @@
-﻿using FluentValidation.Results;
+﻿using FluentAssertions;
 using FluentValidation;
+using FluentValidation.Results;
 using Mongraw.Katalog.Application.Service;
-using Mongraw.Katalog.Application.Service.Interfaces;
 using Mongraw.Katalog.Domain.Interfaces;
 using Mongraw.Katalog.Domain.Models.CategoryEntity;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xunit;
-using FluentAssertions;
 using Mongraw.Katalog.Domain.Models.ItemsEntities;
+using Moq;
+using Xunit;
 
 namespace Mongraw.Katalog.Tests
 {

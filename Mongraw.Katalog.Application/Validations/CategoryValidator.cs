@@ -14,9 +14,10 @@ namespace Mongraw.Katalog.Application.Validations
 
             RuleFor(x => x.Name)
                 .NotEmpty()
-                .WithMessage("Nazwa kategorii nie może być pusta.")
+                .WithName("Nazwa kategorii")
+                .WithMessage(Resources.ThisFieldIsRequired)
                 .MustAsync(async (name, ct) => !await BeUniqueName(name))
-                .WithMessage("Nazwa kategorii musi być unikalna.");
+                .WithMessage(Resources.UniqueNameIsRequire);
         }
 
         private async Task<bool> BeUniqueName(string name)
