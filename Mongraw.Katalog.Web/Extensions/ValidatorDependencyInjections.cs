@@ -9,6 +9,8 @@ namespace Mongraw.Katalog.Web.Extensions
         {
             services.AddValidatorsFromAssemblyContaining<CategoryValidator>();
             services.AddValidatorsFromAssemblyContaining<SubCategoryValidator>();
+            services.AddValidatorsFromAssemblyContaining<AddItemDtoValidator>();
+            services.AddValidatorsFromAssemblyContaining<EditItemDtoValidators>();
             return services;
         }
     }

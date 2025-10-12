@@ -7,7 +7,6 @@ using Mongraw.Katalog.Domain.Models.ItemsEntities;
 using Mongraw.Katalog.Domain.Models.UserManagement;
 using Mongraw.Katalog.Infrastructure.DbConfiguration;
 
-
 namespace Mongraw.Katalog.Web.Data
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, string>
@@ -22,14 +21,18 @@ namespace Mongraw.Katalog.Web.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
             modelBuilder.ApplyConfiguration(new CategoryConfiguration());
             modelBuilder.ApplyConfiguration(new SubCategoryConfiguration());
             modelBuilder.ApplyConfiguration(new ItemsConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new RoleConfiguration());
         }
 
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subcategory> SubCategories { get; set; }
         public DbSet<Item> Items { get; set; }
+
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             ApplyAuditInfo();
@@ -42,7 +45,6 @@ namespace Mongraw.Katalog.Web.Data
 
             foreach (var entry in ChangeTracker.Entries<AuditableEntity>())
             {
-
                 switch (entry.State)
                 {
                     case EntityState.Added:
@@ -50,10 +52,12 @@ namespace Mongraw.Katalog.Web.Data
                         entry.Entity.CreatedBy = userName;
                         entry.Entity.StatusId = 1;
                         break;
+
                     case EntityState.Modified:
                         entry.Entity.ModifiedDate = DateTime.Now;
                         entry.Entity.ModifiedBy = userName;
                         break;
+
                     case EntityState.Deleted:
                         entry.Entity.ModifiedDate = DateTime.Now;
                         entry.Entity.ModifiedBy = userName;
@@ -63,7 +67,6 @@ namespace Mongraw.Katalog.Web.Data
                         entry.State = EntityState.Modified;
                         break;
                 }
-               
             }
         }
     }

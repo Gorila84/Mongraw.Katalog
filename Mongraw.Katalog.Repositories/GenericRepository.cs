@@ -48,7 +48,7 @@ namespace Mongraw.Katalog.Repositories
         }
 
         public async Task<(IEnumerable<T> Items, int TotalCount)> GetAsync(
-      Expression<Func<T, bool>>? filter = null,
+      Expression<Func<T, bool>>? filter,
       int pageNumber = 1,
       int pageSize = 10)
         {
@@ -90,6 +90,21 @@ namespace Mongraw.Katalog.Repositories
             if (include != null)
                 query = include(query);
             return await query.FirstOrDefaultAsync();
+        }
+
+        public IQueryable<T> GetQueryable(
+    Expression<Func<T, bool>>? filter = null,
+    Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null)
+        {
+            IQueryable<T> query = _dbSet;
+
+            if (filter != null)
+                query = query.Where(filter);
+
+            if (include != null)
+                query = include(query);
+
+            return query;
         }
     }
 }

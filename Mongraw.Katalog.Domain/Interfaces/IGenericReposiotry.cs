@@ -21,10 +21,14 @@ namespace Mongraw.Katalog.Domain.Interfaces
               int pageNumber = 1,
               int pageSize = 10);
         Task<IEnumerable<T>> GetAllWithIcludeAsync(
-    Expression<Func<T, bool>>? filter = null,
-    Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
+              Expression<Func<T, bool>>? filter = null,
+              Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
         Task<T> GetOneWithInclude(Expression<Func<T, bool>> filter,
-            Func<IQueryable<T>, IIncludableQueryable<T, object>> include);
+              Func<IQueryable<T>, IIncludableQueryable<T, object>> include);
+
+        IQueryable<T> GetQueryable(
+              Expression<Func<T, bool>>? filter = null,
+              Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null);
 
     }
 }

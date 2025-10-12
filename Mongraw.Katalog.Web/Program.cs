@@ -20,6 +20,7 @@ builder.Services.RegisterRepositories();
 builder.Services.RegisterServices();
 builder.Services.RegisterGenericMethods();
 builder.Services.RegisterFluentValidators();
+builder.Services.MappingRegister();
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
