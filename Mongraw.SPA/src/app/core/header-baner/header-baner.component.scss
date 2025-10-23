@@ -1,0 +1,40 @@
+.hero-banner{
+    background-image: url('../../../assets/images/BANER.jpg');
+    background-size: cover;
+    background-position: left;
+    background-repeat: no-repeat;
+    background-color: black;
+    height: 450px;
+    position: relative;
+    padding: 20px;
+}
+
+.text-container{
+    width: 50%;
+}
+
+.line{
+    width:45px;
+    border-bottom: 3px solid #b28235;
+    margin-bottom: 15px;
+}
+
+.header-button{
+    border-color: #b28235!important;
+    color: #b28235!important;
+    transition: color 0.7s ease, border-color 0.7s ease, background-color 0.7s ease;
+}
+
+.header-button:hover{
+    background-color: #b28235!important;
+    color: white!important;
+}
+
+.lead{
+    font-size: 1.6rem;
+}
+
+.header-title{
+    font-size: 1.8rem;
+    font-style: italic;
+}

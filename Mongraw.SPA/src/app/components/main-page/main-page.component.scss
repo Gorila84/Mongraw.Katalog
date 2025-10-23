@@ -1,0 +1,47 @@
+.lead {
+  font-size: 1.6rem;
+  font-style: italic;
+}
+
+.header-text {
+  font-size: 1.2rem;
+}
+
+.hidden-element {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.hidden-element.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.curved-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.curve {
+  width: 100%;
+  height: 80px;
+  display: block;
+}
+
+.content {
+  background-color: #b28235; 
+  padding: 2rem;
+  color: white;
+}
+
+.contact-button {
+  border-color: white !important;
+  color: white !important; 
+}
+
+.contact-button:hover {
+  background-color: white !important;
+  color: #b28235 !important; 
+}

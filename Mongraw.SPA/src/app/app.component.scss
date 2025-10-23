@@ -1,0 +1,59 @@
+body{
+    background-color: lightgrey;
+}
+
+
+.social-tile {
+  position: fixed;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 1000;
+}
+
+
+.slide-out {
+  background-color: #1877f2; 
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px 0 0 8px;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateX(100%); 
+  transition: all 0.3s ease;
+  pointer-events: none; 
+}
+
+
+.icon-wrapper {
+  width: 40px;
+  height: 40px;
+  background: #1877f2;
+  border-radius: 5px 0 0 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.facebook-icon.mat-icon {
+  font-size: 32px !important; 
+  width: 32px !important;
+  height: 32px !important;
+  color: white;
+}
+
+.social-tile:hover .slide-out {
+  opacity: 1;
+  transform: translateX(0); 
+  pointer-events: auto;
+}
+.social-tile:hover .icon-wrapper {
+  border-radius: 0 0 0 0;
+}
+
+.custom-facebook {
+  color: #1877f2;
+}

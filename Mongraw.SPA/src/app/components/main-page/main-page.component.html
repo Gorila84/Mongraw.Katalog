@@ -1,0 +1,36 @@
+<app-header-baner></app-header-baner>
+<div class="container header-text mt-4">
+  <div class="d-flex flex-column col-10">
+    <h2 class="lead">Witaj w Mongraw</h2>
+    <p class="header-text">
+      Pomagamy firmom – małym i dużym – wyróżnić się na rynku i skutecznie
+      budować swoją markę. Współpracując z nami, zyskujesz partnera, który
+      wspiera Twój rozwój i sukces na każdym kroku. Dołącz do grona naszych
+      zadowolonych klientów i zobacz, jak razem możemy podnieść poziom Twojego
+      biznesu!
+    </p>
+  </div>
+</div>
+
+
+<!-- <ng-container  *ngFor="let article of articles; let i = index">
+  <app-article #observeElement [class.visible]="isVisible" [article]="article" [index]="i"></app-article>
+</ng-container> -->
+
+<ng-container *ngFor="let article of articles; let i = index">
+  <div
+    #observeElement
+    [ngClass]="{'visible': isVisible[i], 'hidden-element': true}">
+    <app-article [article]="article" [index]="i"></app-article>
+  </div>
+</ng-container>
+
+<div class="curved-wrapper">
+  <svg viewBox="0 0 100 20" preserveAspectRatio="none" class="curve">
+    <path d="M0,20 Q50,0 100,20 L100,20 L0,20 Z" fill="#b28235" />
+  </svg>
+  <div class="content d-flex flex-column justify-content-center align-items-center">
+    <h1>Masz pytania? Skontaktuj się z nami</h1>
+    <button mat-stroked-button (click)="moveToContatct()" class="contact-button" >Kontakt</button>
+  </div>
+</div>

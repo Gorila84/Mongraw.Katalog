@@ -1,0 +1,29 @@
+.example-card {
+  max-width: 400px;
+  margin-bottom: 8px;
+}
+
+
+.card-button-group{
+  width: 100%;
+}
+.card-button{
+  width: 49%;
+}
+
+.mat-mdc-card-header {
+    border: 1px solid #e0e0e0;
+}
+
+::ng-deep .mat-mdc-card-outlined {
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  border-width: 0 !important;
+  border-color: transparent !important;
+}
+
+.mat-mdc-card-actions {
+ 
+    min-height: 52px;
+    padding: 0px;
+}

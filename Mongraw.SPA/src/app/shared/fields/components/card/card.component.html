@@ -1,0 +1,36 @@
+<mat-card class="example-card" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>{{ title }}</mat-card-title>
+    <mat-card-subtitle>{{ subtitle }}</mat-card-subtitle>
+  </mat-card-header>
+  <img
+    mat-card-image
+    src="https://material.angular.dev/assets/img/examples/shiba2.jpg"
+    [alt]="altText"
+  />
+
+  <mat-card-actions>
+    <!-- <button
+      mat-raised-button
+      class="square small card-button"
+      disabledInteractive
+      matTooltip="This is a tooltip!"
+    >
+      <mat-icon svgIcon="shopping_bag"></mat-icon> Dodaj
+    </button>
+    <button
+      mat-raised-button
+      class="square small card-button"
+      disabledInteractive
+      matTooltip="This is a tooltip!"
+    >
+      <mat-icon svgIcon="receipt_long"></mat-icon> Detale
+    </button> -->
+
+    <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="card-button-group" [hideSingleSelectionIndicator]="true">
+      <mat-button-toggle value="bold" class="card-button-group"><mat-icon svgIcon="shopping_bag"></mat-icon> Dodaj</mat-button-toggle>
+      <mat-button-toggle value="italic" class="card-button-group"> <mat-icon svgIcon="receipt_long"></mat-icon> Detale</mat-button-toggle>
+    </mat-button-toggle-group>
+  </mat-card-actions>
+</mat-card>

@@ -1,0 +1,70 @@
+@use '@angular/material' as mat;
+
+@include mat.core();
+
+body.mat-typography, 
+.mat-typography {
+  font-family: 'Montserrat', sans-serif !important;
+  font-weight: 400;
+  color: #000000;
+}
+
+html {
+  @include mat.theme(
+    (
+      color: (
+        primary: mat.$azure-palette,
+        tertiary: mat.$orange-palette,
+        theme-type: light,
+      ),
+      typography: Roboto,
+      density: 0,
+    )
+  );
+}
+
+.square {
+  @include mat.button-overrides(
+    (
+      filled-container-shape: 8px,
+      outlined-container-shape: 8px,
+      protected-container-shape: 8px,
+      text-container-shape: 8px,
+    )
+  );
+  --mat-icon-button-container-shape: 8px;
+}
+
+.medium {
+  @include mat.theme(
+    (
+      density: -1,
+    )
+  );
+
+  @include mat.button-overrides(
+    (
+      filled-horizontal-padding: 20px,
+      outlined-horizontal-padding: 20px,
+      text-horizontal-padding: 20px,
+      protected-horizontal-padding: 20px,
+    )
+  );
+}
+
+.small {
+  @include mat.theme(
+    (
+      density: -2,
+    )
+  );
+
+  @include mat.button-overrides(
+    (
+      filled-horizontal-padding: 16px,
+      outlined-horizontal-padding: 16px,
+      text-horizontal-padding: 16px,
+      protected-horizontal-padding: 16px,
+    )
+  );
+}

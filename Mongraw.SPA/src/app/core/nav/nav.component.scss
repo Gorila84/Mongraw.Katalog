@@ -1,0 +1,18 @@
+.navbar{
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    height: 132px;
+    background-color: white!important;
+    opacity: 0.9!important;
+    border-bottom: 1px solid #e0e0e0;
+    font-size: 16px;
+}
+
+a:hover {	
+	color: #b28235; 
+}
+
+.navbar .nav-link.active {
+    color: #b28235 !important;
+  }
