@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Mongraw.Katalog.Domain.Models;
 using Mongraw.Katalog.Web.Data;
 using Mongraw.Katalog.Web.Extensions;
 using Serilog;
@@ -10,6 +11,7 @@ var connectionString = builder.Configuration.GetConnectionString("DefaultConnect
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlite(connectionString));
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+builder.Services.Configure<AppConfig>(builder.Configuration);
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ApplicationDbContext>();
@@ -21,6 +23,10 @@ builder.Services.RegisterServices();
 builder.Services.RegisterGenericMethods();
 builder.Services.RegisterFluentValidators();
 builder.Services.MappingRegister();
+
+#if DEBUG
+builder.Services.AddSwaggerGen();
+#endif
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)
@@ -35,7 +41,25 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Host.UseSerilog();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngularDev",
+        policy =>
+        {
+            policy.WithOrigins("http://localhost:4200") // adres Angulara
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
 var app = builder.Build();
+
+#if DEBUG
+app.UseSwagger();
+app.UseSwaggerUI();
+#endif
+
+app.UseCors("AllowAngularDev");
 
 app.UseSerilogRequestLogging();
 

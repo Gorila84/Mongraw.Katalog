@@ -162,29 +162,75 @@ namespace Mongraw.Katalog.Infrastructure.Migrations
                     b.ToTable("SubCategories");
                 });
 
-            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ImageEntities.Image", b =>
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Alternative", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<string>("AltText")
+                    b.Property<string>("Code")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("CreatedAt")
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<bool>("IsActive")
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Alternatives");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Attribute", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Text")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("VariantId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VariantId");
+
+                    b.ToTable("Attributes");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
                     b.Property<int?>("ItemId")
                         .HasColumnType("INTEGER");
 
-                    b.Property<DateTime>("UpdatedAt")
+                    b.Property<string>("Link")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<string>("Url")
+                    b.Property<int?>("VariantId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ViewCode")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
@@ -192,7 +238,9 @@ namespace Mongraw.Katalog.Infrastructure.Migrations
 
                     b.HasIndex("ItemId");
 
-                    b.ToTable("Image");
+                    b.HasIndex("VariantId");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Item", b =>
@@ -242,6 +290,167 @@ namespace Mongraw.Katalog.Infrastructure.Migrations
                     b.HasIndex("SubcategoryId");
 
                     b.ToTable("Items");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Nomenclature", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("BoxCapacity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("BoxDepth")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("BoxHeight")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("BoxWidth")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("Ean")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("ExpeditionQuantity")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("GrossWeight")
+                        .HasColumnType("REAL");
+
+                    b.Property<double>("NetWeight")
+                        .HasColumnType("REAL");
+
+                    b.Property<string>("ProductSizeCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SizeCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SizeName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TariffNomenclature")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("VariantId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<double>("Volume")
+                        .HasColumnType("REAL");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("VariantId");
+
+                    b.ToTable("Nomenclatures");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AdditionalInformationPdf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CategoryCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CategoryName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("CertificationPdf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Code")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("DeclarationPdf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Gender")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("GenderCode")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ProductCardPdf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("SizeChartPdf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Specification")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Subtitle")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("TechnicalSpecificationPdf")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Trademark")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("UserInformationPdf")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Products");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Variant", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ColorCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("ColorIconLink")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("ProductId")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProductId");
+
+                    b.ToTable("Variants");
                 });
 
             modelBuilder.Entity("Mongraw.Katalog.Domain.Models.UserManagement.Role", b =>
@@ -394,11 +603,29 @@ namespace Mongraw.Katalog.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ImageEntities.Image", b =>
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Alternative", b =>
+                {
+                    b.HasOne("Mongraw.Katalog.Domain.Models.ItemsEntities.Product", null)
+                        .WithMany("Alternatives")
+                        .HasForeignKey("ProductId");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Attribute", b =>
+                {
+                    b.HasOne("Mongraw.Katalog.Domain.Models.ItemsEntities.Variant", null)
+                        .WithMany("Attributes")
+                        .HasForeignKey("VariantId");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Image", b =>
                 {
                     b.HasOne("Mongraw.Katalog.Domain.Models.ItemsEntities.Item", null)
                         .WithMany("Images")
                         .HasForeignKey("ItemId");
+
+                    b.HasOne("Mongraw.Katalog.Domain.Models.ItemsEntities.Variant", null)
+                        .WithMany("Images")
+                        .HasForeignKey("VariantId");
                 });
 
             modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Item", b =>
@@ -420,6 +647,20 @@ namespace Mongraw.Katalog.Infrastructure.Migrations
                     b.Navigation("Subcategory");
                 });
 
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Nomenclature", b =>
+                {
+                    b.HasOne("Mongraw.Katalog.Domain.Models.ItemsEntities.Variant", null)
+                        .WithMany("Nomenclatures")
+                        .HasForeignKey("VariantId");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Variant", b =>
+                {
+                    b.HasOne("Mongraw.Katalog.Domain.Models.ItemsEntities.Product", null)
+                        .WithMany("Variants")
+                        .HasForeignKey("ProductId");
+                });
+
             modelBuilder.Entity("Mongraw.Katalog.Domain.Models.CategoryEntity.Category", b =>
                 {
                     b.Navigation("Items");
@@ -435,6 +676,22 @@ namespace Mongraw.Katalog.Infrastructure.Migrations
             modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Item", b =>
                 {
                     b.Navigation("Images");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Product", b =>
+                {
+                    b.Navigation("Alternatives");
+
+                    b.Navigation("Variants");
+                });
+
+            modelBuilder.Entity("Mongraw.Katalog.Domain.Models.ItemsEntities.Variant", b =>
+                {
+                    b.Navigation("Attributes");
+
+                    b.Navigation("Images");
+
+                    b.Navigation("Nomenclatures");
                 });
 #pragma warning restore 612, 618
         }

@@ -32,7 +32,12 @@ namespace Mongraw.Katalog.Web.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Subcategory> SubCategories { get; set; }
         public DbSet<Item> Items { get; set; }
-
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Alternative> Alternatives { get; set; }
+        public DbSet<Mongraw.Katalog.Domain.Models.ItemsEntities.Attribute> Attributes { get; set; }
+        public DbSet<Image> Images { get; set; }
+        public DbSet<Nomenclature> Nomenclatures { get; set; }
+        public DbSet<Variant> Variants { get; set; }
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = new CancellationToken())
         {
             ApplyAuditInfo();

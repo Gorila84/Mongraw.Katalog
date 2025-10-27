@@ -1,0 +1,15 @@
+<mat-card class="product-card mb-2 mr-2" appearance="outlined">
+  <mat-card-header>
+    <div mat-card-avatar class="example-header-image"></div>
+    <mat-card-title>
+  {{ title.length > 29 ? (title | slice:0:29) + '...' : title }}
+</mat-card-title>
+
+    <mat-card-subtitle>{{subtitle}}</mat-card-subtitle>
+  </mat-card-header>
+  <img mat-card-image [src]="imageUrl" alt="Photo of a Shiba Inu" class="product-card-image">
+
+  <mat-card-actions class="d-flex justify-content-center">
+    <app-storked-button>Szczegóły</app-storked-button>
+  </mat-card-actions>
+</mat-card>

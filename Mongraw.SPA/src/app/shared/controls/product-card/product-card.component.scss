@@ -1,0 +1,21 @@
+.product-card {
+    height: 316px;
+}
+
+.mat-mdc-card-title{
+    font-size: 16px !important;
+}
+
+.product-card-image {
+  margin: 0auto;
+  max-height: 200px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  display: block;
+}
+
+.mat-mdc-card-avatar{
+    width: 0px !important;
+    height: 0px !important;
+}

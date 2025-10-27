@@ -15,10 +15,7 @@ namespace Mongraw.Katalog.Application.Mapper
         {
             CreateMap<Item, AddItemDto>().ReverseMap();
             CreateMap<Item, EditItemDto>().ReverseMap();
-            CreateMap<Item, ItemListDto>()
-                .ForMember(dest => dest.MainImage, opt => opt.MapFrom(
-                     src => src.Images.FirstOrDefault(img => img.IsMain)
-                ));
+            CreateMap<Item, ItemListDto>().ReverseMap();
         }
     }
 }

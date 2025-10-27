@@ -1,0 +1,23 @@
+<div class="container">
+  <div class="row mt-2">
+    @for( product of products; track product) {
+    <app-product-card
+      class="col-md-3 col-sm-12"
+      [title]="product.name"
+      [subtitle]="product.subtitle"
+      [imageUrl]="product.imageUrl"
+    >
+    </app-product-card>
+    }
+  </div>
+  <mat-paginator
+    #paginator
+    class="demo-paginator"
+    (page)="handlePageEvent($event)"
+    [length]="totalCount"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page"
+  >
+  </mat-paginator>
+</div>
